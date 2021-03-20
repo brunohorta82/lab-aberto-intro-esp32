@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>LabAberto - IOT</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script>
+    setInterval(function () {
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          document.getElementById("temperature").innerHTML = this.responseText;
+        }
+      };
+      xhttp.open("GET", "/temperature", true);
+      xhttp.send();
+    }, 10000);
+
+    setInterval(function () {
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          document.getElementById("humidity").innerHTML = this.responseText;
+        }
+      };
+      xhttp.open("GET", "/humidity", true);
+      xhttp.send();
+    }, 10000);
+  </script>
+</head>
+
+<body>
+  <img src="/logo.png">
+  <h1>SENSORES</h1>
+  <p>
+    <i class="fas fa-thermometer-half" style="color:#00add6;"></i>
+    <span class="value" id="temperature">%TEMPERATURE%</span>
+    <sup class="units">ºC</sup>
+    <i class="fas fa-tint" style="margin-left: 20px; color:#00add6;"></i>
+    <span class="value" id="humidity">%HUMIDITY%</span>
+    <sup class="units">&percnt;</sup>
+  </p>
+  <h1>ATUADORES</h1>
+  <p>
+    <a href="/toggle_relay"><button class="button %RELAY_STATE%">RELÉ %RELAY_STATE%</button></a>
+    </br>
+    <a href="/toggle_led"><button class="button %LED_STATE%">LED %LED_STATE%</button></a>
+  </p>
+
+</body>
+
+</html>
